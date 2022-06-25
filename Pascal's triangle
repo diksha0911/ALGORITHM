@@ -1,0 +1,19 @@
+int** generate(int numRows, int* returnSize, int** returnColumnSizes){
+    *returnSize = numRows;
+    *returnColumnSizes = (int *) malloc (sizeof(int) * numRows);
+	for (int i = 0; i < numRows; i++) 
+		(*returnColumnSizes)[i] = i + 1;
+    
+    int **pascal = (int**)malloc(numRows*sizeof(int*));
+    for (int i=0; i<numRows; i++){
+        pascal[i] = (int*)malloc((i+1)*sizeof(int));
+        pascal[i][0] = 1;
+        pascal[i][i] = 1;
+        if (i >1 ){
+            for (int j=1; j<i; j++){
+                pascal[i][j] = pascal[i-1][j-1] + pascal[i-1][j] ;
+            }
+        }
+    }
+    return pascal;
+}
